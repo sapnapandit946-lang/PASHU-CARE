@@ -1,0 +1,6 @@
+0 Healthy cow
+1 Lumpy Skin Disease
+2 Ringworm Disease
+3 Foot and Mouth Disease
+4 Photosensitization Disease
+5 Not a Cow

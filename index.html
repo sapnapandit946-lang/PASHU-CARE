@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PASHU CARE - AI-powered veterinary diagnostic platform for cow health.">
+    <meta name="theme-color" content="#050a14">
+    <title>PASHU CARE - ML Cow Disease Diagnosis & AI Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css?v=20260310r3">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23059a86'/><text x='50' y='62' text-anchor='middle' font-size='40' fill='white' font-family='Arial'>PC</text></svg>">
+    <script src="i18n.js?v=20260310r3"></script>
+</head>
+<body>
+
+<div class="app-shell">
+
+    <!-- ═══ Top Navigation Bar ═══ -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-left">
+            <div class="nav-brand">
+                <span class="brand-icon">&#9877;</span>
+                <div class="brand-text">
+                    <h1 data-i18n="app_title">PASHU CARE</h1>
+                    <span class="brand-badge"><span class="pulse-dot"></span><span data-i18n="ml_engine">ML Engine</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-tabs" id="navTabs">
+            <button class="nav-tab active" data-target="tab-dashboard" data-i18n="nav_dashboard">Dashboard</button>
+            <button class="nav-tab" data-target="tab-diagnosis" data-i18n="nav_diagnose">Diagnose</button>
+            <button class="nav-tab" data-target="tab-nutrient" data-i18n="nav_nutrient">Nutrition</button>
+            <button class="nav-tab" data-target="tab-history" data-i18n="nav_history">History</button>
+            <button class="nav-tab" data-target="tab-report">Detail Report</button>
+            <button class="nav-tab" data-target="tab-chat" data-i18n="nav_chat">AI Chat</button>
+            <div class="nav-pill" id="navPill"></div>
+        </div>
+
+        <div class="nav-right">
+            <select id="langSelect" class="lang-select" onchange="changeLanguage(this.value)">
+                <option value="en">EN</option>
+                <option value="hi">Hindi</option>
+                <option value="mr">Marathi</option>
+                <option value="bn">Bengali</option>
+                <option value="or">Odia</option>
+                <option value="ml">Malayalam</option>
+                <option value="ta">Tamil</option>
+                <option value="kn">Kannada</option>
+                <option value="pa">Punjabi</option>
+                <option value="as">Assamese</option>
+                <option value="sa">Sanskrit</option>
+            </select>
+            <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <span class="theme-icon-dark">&#9790;</span>
+                <span class="theme-icon-light" style="display:none;">&#9728;</span>
+            </button>
+            <div class="profile-trigger" onclick="toggleProfilePanel()">
+                <div class="profile-avatar" id="navAvatar">&#128100;</div>
+                <span class="profile-name" id="navUserName" data-i18n="guest">Guest</span>
+                <span class="profile-chevron">&#9662;</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ Mobile Header ═══ -->
+    <header class="mobile-header" id="mobileHeader">
+        <div class="mobile-brand">&#9877; <span data-i18n="app_title">PASHU CARE</span></div>
+        <div class="mobile-actions">
+            <button class="theme-btn" onclick="toggleTheme()"><span class="theme-icon-dark">&#9790;</span><span class="theme-icon-light" style="display:none;">&#9728;</span></button>
+            <div class="profile-trigger" onclick="toggleProfilePanel()">
+                <div class="profile-avatar" id="mobileAvatar">&#128100;</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ Profile Side Panel ═══ -->
+    <div class="profile-overlay" id="profileOverlay" onclick="closeProfilePanel()"></div>
+    <aside class="profile-panel" id="profilePanel">
+        <div class="profile-panel-header">
+            <h3 data-i18n="set_profile_title">Profile</h3>
+            <button class="profile-close" onclick="closeProfilePanel()">&times;</button>
+        </div>
+        <div class="profile-panel-body">
+            <div class="profile-card" id="profileCard">
+                <div class="profile-card-avatar" id="profileAvatar">&#128100;</div>
+                <div class="profile-card-name" id="profileName" data-i18n="guest">Guest</div>
+                <div class="profile-card-email" id="profileEmail"></div>
+            </div>
+            <div class="profile-actions" id="profileActions">
+                <button class="profile-action-btn" id="authBtn" onclick="openAuthModal('login')">
+                    <span>&#128274;</span> <span data-i18n="set_login_btn">Login / Register</span>
+                </button>
+            </div>
+            <div class="profile-menu">
+                <button class="profile-menu-item" onclick="switchTab('tab-settings'); closeProfilePanel();">
+                    <span>&#9881;</span> <span data-i18n="nav_settings">Settings</span>
+                </button>
+                <button class="profile-menu-item" onclick="switchTab('tab-feedback'); closeProfilePanel();">
+                    <span>&#128172;</span> <span data-i18n="nav_feedback">Feedback</span>
+                </button>
+                <button class="profile-menu-item" onclick="clearHistory()">
+                    <span>&#128465;</span> <span data-i18n="hist_clear">Clear History</span>
+                </button>
+            </div>
+        </div>
+        <div class="profile-panel-footer">
+            <select id="langSelectPanel" class="lang-select-full" onchange="changeLanguage(this.value); document.getElementById('langSelect').value=this.value;">
+                <option value="en">English</option>
+                <option value="hi">Hindi (हिन्दी)</option>
+                <option value="mr">Marathi (मराठी)</option>
+                <option value="bn">Bengali (বাংলা)</option>
+                <option value="or">Odia (ଓଡ଼ିଆ)</option>
+                <option value="ml">Malayalam (മലയാളം)</option>
+                <option value="ta">Tamil (தமிழ்)</option>
+                <option value="kn">Kannada (ಕನ್ನಡ)</option>
+                <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+                <option value="as">Assamese (অসমীয়া)</option>
+                <option value="sa">Sanskrit (संस्कृतम्)</option>
+            </select>
+        </div>
+    </aside>
+
+    <!-- ═══ Auth Modal ═══ -->
+    <div class="modal-overlay" id="authOverlay" onclick="closeAuthModal()"></div>
+    <div class="auth-modal" id="authModal">
+        <button class="auth-close" onclick="closeAuthModal()">&times;</button>
+        <div class="auth-tabs">
+            <button class="auth-tab active" id="authTabLogin" onclick="switchAuthTab('login')">Login</button>
+            <button class="auth-tab" id="authTabSignup" onclick="switchAuthTab('signup')">Sign Up</button>
+        </div>
+        <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" class="form-input" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="loginSubmitBtn">Login</button>
+            <p class="auth-error" id="loginError"></p>
+        </form>
+        <form class="auth-form" id="signupForm" style="display:none;" onsubmit="handleSignup(event)">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="signupName" class="form-input" placeholder="Dr. Ramesh" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="signupEmail" class="form-input" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signupPassword" class="form-input" placeholder="Min 6 characters" minlength="6" required>
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <select id="signupRole" class="form-input">
+                    <option value="veterinarian">Veterinarian</option>
+                    <option value="farmer">Farmer</option>
+                    <option value="student">Student</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="signupSubmitBtn">Create Account</button>
+            <p class="auth-error" id="signupError"></p>
+        </form>
+    </div>
+
+    <!-- ═══ Mobile Tab Bar ═══ -->
+    <nav class="mobile-tab-bar" id="mobileTabBar">
+        <button class="mobile-tab active" data-target="tab-dashboard"><span>&#128200;</span><small data-i18n="nav_dashboard">Dashboard</small></button>
+        <button class="mobile-tab" data-target="tab-diagnosis"><span>&#128300;</span><small data-i18n="nav_diagnose">Diagnose</small></button>
+        <button class="mobile-tab" data-target="tab-chat"><span>&#129302;</span><small data-i18n="nav_chat">AI Chat</small></button>
+        <button class="mobile-tab" data-target="tab-history"><span>&#128221;</span><small data-i18n="nav_history">History</small></button>
+        <button class="mobile-tab" data-target="tab-report"><span>&#128196;</span><small>Report</small></button>
+    </nav>
+
+    <!-- ═══ Main Content ═══ -->
+    <main class="main-content">
+        <div class="content-scroll">
+
+            <!-- TAB: DASHBOARD -->
+            <section class="tab-pane active" id="tab-dashboard">
+                                <div class="page-header panel-header panel-dashboard">
+                    <div class="panel-main">
+                        <p class="panel-kicker">OPERATIONS HUB</p>
+                        <h2 class="page-title" data-i18n="nav_dashboard">Dashboard</h2>
+                        <p class="page-desc" data-i18n="dash_page_desc">Real-time overview of diagnostics, system status, and recent activity.</p>
+                    </div>
+                    <div class="panel-actions">
+                        <span class="panel-chip">Live Overview</span>
+                        <button class="btn btn-primary" onclick="switchTab('tab-diagnosis')" data-i18n="dash_new_scan">&#128300; New Diagnostic Scan</button>
+                    </div>
+                    <div class="panel-points">
+                        <span>&#128737; Role-based secure workspace</span>
+                        <span>&#9201; Updated with latest scan activity</span>
+                        <span>&#9889; Tap any module to continue workflow</span>
+                    </div>
+                </div><section class="executive-banner glass-card" aria-label="Platform highlights">
+                    <div class="executive-banner-main">
+                        <p class="eyebrow" data-i18n="dash_exec_eyebrow">Veterinary Intelligence Platform</p>
+                        <h3 data-i18n="dash_exec_title">Clinical-grade workflow for faster, safer livestock decisions</h3>
+                        <p class="executive-copy" data-i18n="dash_exec_copy">Unified diagnosis, treatment guidance, and nutrient planning with multilingual support for field teams.</p>
+                    </div>
+                    <div class="executive-badges">
+                        <span class="executive-badge" data-i18n="dash_exec_badge_1">&#10003; AI-assisted triage</span>
+                        <span class="executive-badge" data-i18n="dash_exec_badge_2">&#10003; Offline-ready workflow</span>
+                        <span class="executive-badge" data-i18n="dash_exec_badge_3">&#10003; Structured medical history</span>
+                    </div>
+                </section>
+
+                <div class="kpi-grid">
+                    <div class="kpi-card kpi-accent-1">
+                        <div class="kpi-icon">&#128202;</div>
+                        <div class="kpi-data">
+                            <span class="kpi-value" id="dashTotalScans">0</span>
+                            <span class="kpi-label" data-i18n="dash_total_scans">Total Scans</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-accent-2">
+                        <div class="kpi-icon">&#9888;</div>
+                        <div class="kpi-data">
+                            <span class="kpi-value" id="dashAlerts">0</span>
+                            <span class="kpi-label" data-i18n="dash_alerts">Alert Cases</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-accent-3">
+                        <div class="kpi-icon">&#128154;</div>
+                        <div class="kpi-data">
+                            <span class="kpi-value" id="dashHealthyCases">0</span>
+                            <span class="kpi-label" data-i18n="dash_healthy">Healthy Cases</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-accent-4">
+                        <div class="kpi-icon">&#129504;</div>
+                        <div class="kpi-data">
+                            <span class="kpi-value" id="dashUnclearScans">0</span>
+                            <span class="kpi-label" data-i18n="dash_unclear_scans">Unclear Scans</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-grid">
+                    <div class="glass-card">
+                        <div class="card-header">
+                            <h3 data-i18n="dash_last_report_title">Last Report Snapshot</h3>
+                            <button class="btn btn-sm btn-secondary" onclick="switchTab('tab-report')" data-i18n="dash_open_report">Open Report</button>
+                        </div>
+                        <div class="latest-scan-display" id="dashLatestDiagnosis">
+                            <div class="empty-mini" data-i18n="dash_last_report_empty">No report yet</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions-section">
+                    <h3 data-i18n="dash_quick_actions">Quick Actions</h3>
+                    <div class="quick-actions-grid">
+                        <button class="quick-action-card qa-diagnose" onclick="switchTab('tab-diagnosis')">
+                            <span class="qa-top">
+                                <span class="qa-icon-wrap"><span class="qa-icon">&#128300;</span></span>
+                                <span class="qa-arrow">&#8599;</span>
+                            </span>
+                            <span class="qa-content">
+                                <span class="qa-label" data-i18n="nav_diagnose">New Diagnosis</span>
+                                <span class="qa-meta" data-i18n="dash_quick_diagnose_meta">Capture image and run model inference</span>
+                            </span>
+                        </button>
+                        <button class="quick-action-card qa-chat" onclick="switchTab('tab-chat')">
+                            <span class="qa-top">
+                                <span class="qa-icon-wrap"><span class="qa-icon">&#129302;</span></span>
+                                <span class="qa-arrow">&#8599;</span>
+                            </span>
+                            <span class="qa-content">
+                                <span class="qa-label" data-i18n="nav_chat">AI Chat</span>
+                                <span class="qa-meta" data-i18n="dash_quick_chat_meta">Ask treatment and symptom guidance</span>
+                            </span>
+                        </button>
+                        <button class="quick-action-card qa-nutri" onclick="switchTab('tab-nutrient')">
+                            <span class="qa-top">
+                                <span class="qa-icon-wrap"><span class="qa-icon">&#9878;</span></span>
+                                <span class="qa-arrow">&#8599;</span>
+                            </span>
+                            <span class="qa-content">
+                                <span class="qa-label" data-i18n="nav_nutrient">Nutrition</span>
+                                <span class="qa-meta" data-i18n="dash_quick_nutri_meta">Calculate feed and water requirement</span>
+                            </span>
+                        </button>
+                        <button class="quick-action-card qa-history" onclick="switchTab('tab-history')">
+                            <span class="qa-top">
+                                <span class="qa-icon-wrap"><span class="qa-icon">&#128221;</span></span>
+                                <span class="qa-arrow">&#8599;</span>
+                            </span>
+                            <span class="qa-content">
+                                <span class="qa-label" data-i18n="nav_history">History</span>
+                                <span class="qa-meta" data-i18n="dash_quick_history_meta">Review saved cases and reports</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="glass-card activity-hub">
+                    <div class="activity-hub-head">
+                        <div>
+                            <h3 data-i18n="dash_recent_activity">Recent Activity</h3>
+                            <p class="activity-sub" data-i18n="dash_activity_sub">Track latest cases with priority, confidence and recommended follow-up.</p>
+                        </div>
+                        <div class="activity-actions">
+                            <div class="activity-filters">
+                                <button class="activity-filter active" type="button" onclick="setActivityFilter('all', this)" data-i18n="dash_filter_all">All</button>
+                                <button class="activity-filter" type="button" onclick="setActivityFilter('urgent', this)" data-i18n="dash_filter_urgent">Urgent</button>
+                                <button class="activity-filter" type="button" onclick="setActivityFilter('healthy', this)" data-i18n="dash_filter_healthy">Healthy</button>
+                                <button class="activity-filter" type="button" onclick="setActivityFilter('unclear', this)" data-i18n="dash_filter_unclear">Needs Re-scan</button>
+                            </div>
+                            <button class="btn btn-sm btn-secondary" onclick="switchTab('tab-history')" data-i18n="dash_view_all">View All</button>
+                        </div>
+                    </div>
+
+                    <div class="activity-summary" id="dashActivitySummary">
+                        <div class="activity-stat-card">
+                            <span class="activity-stat-label" data-i18n="dash_stat_total">Total</span>
+                            <span class="activity-stat-value" id="dashActTotal">0</span>
+                        </div>
+                        <div class="activity-stat-card">
+                            <span class="activity-stat-label" data-i18n="dash_stat_urgent">Urgent</span>
+                            <span class="activity-stat-value" id="dashActUrgent">0</span>
+                        </div>
+                        <div class="activity-stat-card">
+                            <span class="activity-stat-label" data-i18n="dash_stat_confidence">Avg Confidence</span>
+                            <span class="activity-stat-value" id="dashActAvgConf">0%</span>
+                        </div>
+                    </div>
+
+                    <div id="dashRecentActivity" class="recent-activity-list">
+                        <div class="empty-mini" data-i18n="dash_empty">No diagnosis records yet. Run your first scan to populate this dashboard.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: DIAGNOSIS -->
+            <section class="tab-pane" id="tab-diagnosis">
+                                <div class="page-header panel-header panel-diagnosis">
+                    <div class="panel-main">
+                        <p class="panel-kicker">DIAGNOSTICS COMMAND CENTER</p>
+                        <h2 class="page-title" data-i18n="diag_title">Upload & Analyze</h2>
+                        <p class="page-desc" data-i18n="diag_desc">Take a clear photo of the affected area. Our ML model will analyze visible symptoms.</p>
+                    </div>
+                    <div class="panel-actions">
+                        <span class="panel-chip">AI Engine Ready</span>
+                    </div>
+                    <div class="panel-points">
+                        <span>&#128247; Capture clear clinical evidence</span>
+                        <span>&#129504; Hybrid model inference enabled</span>
+                        <span>&#128203; Reports auto-saved to history</span>
+                    </div>
+                </div><div class="diag-workflow glass-card">
+                    <div class="diag-step" data-i18n="diag_step1">1. Capture Clinical Image</div>
+                    <div class="diag-step" data-i18n="diag_step2">2. Select Observable Symptoms</div>
+                    <div class="diag-step" data-i18n="diag_step3">3. Run Diagnostic Inference</div>
+                    <div class="diag-step" data-i18n="diag_step4">4. Review Actionable Report</div>
+                </div>
+
+                <div class="diag-layout">
+                    <div class="upload-zone glass-card premium-upload" id="dropZone">
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <div class="card-header">
+                            <h3 data-i18n="diag_clinical_input">Clinical Image Input</h3>
+                            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput').click()" data-i18n="diag_select_image">Select Image</button>
+                        </div>
+                        <p class="card-sub" data-i18n="diag_image_tip">Use a clear, well-lit image focused on the affected area.</p>
+                        
+                        <div id="uploadPlaceholder" class="premium-placeholder" onclick="document.getElementById('fileInput').click()">
+                            <div class="premium-icon-box">
+                                <span class="premium-icon">&#128247;</span>
+                            </div>
+                            <p class="premium-text" data-i18n="diag_upload_box">Click or drag image to upload</p>
+                            <small class="premium-sub" data-i18n="diag_upload_sub">Supports JPG, PNG (Max 5MB)</small>
+                        </div>
+                        
+                        <div class="upload-preview" id="uploadPreview" style="display:none; position:relative;">
+                            <img id="previewImage" src="" alt="Preview">
+                            <div class="elegant-scanner">
+                                <div class="elegant-laser"></div>
+                            </div>
+                            <div class="upload-actions" id="uploadActions" style="margin-top:16px;">
+                                <button class="btn btn-secondary btn-sm" onclick="removeUploadedImage()" data-i18n="diag_remove">Remove Image</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="symptom-panel glass-card premium-symptoms">
+                        <div class="card-header">
+                            <h3 data-i18n="diag_symptoms_title">Select Additional Symptoms</h3>
+                            <button class="btn btn-secondary btn-sm" onclick="clearSelectedSymptoms()" data-i18n="diag_clear_symptoms">Clear</button>
+                        </div>
+                        <p class="card-sub" data-i18n="diag_symptom_tip">Add observed signs to improve diagnosis confidence.</p>
+                        <div class="selected-summary premium-summary" id="selectedSummary" style="display:none;">
+                            <span id="selectedCount">0</span> symptoms selected
+                        </div>
+                        <div id="symptomCategories" class="symptom-categories-list"></div>
+                    </div>
+                </div>
+
+                <div class="diag-actions glass-card premium-actions">
+                    <div class="diag-status-block">
+                        <span class="diag-status-label" data-i18n="diag_readiness">Diagnosis Readiness</span>
+                        <span class="diag-status-value pending" id="diagReadiness">Awaiting image or symptom input</span>
+                        <span class="diag-status-meta">Selected symptoms: <strong id="diagSelectedCount">0</strong></span>
+                        <div class="diag-model-source" aria-live="polite">
+                            <span class="diag-model-label" data-i18n="diag_model_source">Model Source:</span>
+                            <span class="diag-model-chip auto" id="diagModelSource">Auto (Online)</span>
+                        </div>
+                    </div>
+                    <div class="diag-actions-buttons">
+                        <button class="btn btn-secondary" onclick="resetDiagnosis()" data-i18n="diag_reset">Reset</button>
+                        <button class="analyze-btn premium-btn" id="analyzeBtn" onclick="startAnalysis()" disabled>
+                            <span class="pulse-dot"></span>
+                            <span data-i18n="diag_btn_run">Run ML Diagnosis</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="analysis-loader" id="analysisLoader">
+                    <div class="loader-card glass-card premium-loader">
+                        <div class="modern-spinner"></div>
+                        <p class="loader-text">Analyzing Symptoms & Image...</p>
+                        <p class="loader-sub" id="loaderSub">Initializing model...</p>
+                        <div class="analysis-steps">
+                            <div class="a-step" id="step-load"><span class="step-icon">○</span> Load Model</div>
+                            <div class="a-step" id="step-preprocess"><span class="step-icon">○</span> Preprocess</div>
+                            <div class="a-step" id="step-inference"><span class="step-icon">○</span> Inference</div>
+                            <div class="a-step" id="step-cross"><span class="step-icon">○</span> Cross-Ref</div>
+                            <div class="a-step" id="step-report"><span class="step-icon">○</span> Report</div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="results-section" id="resultsSection" aria-live="polite">
+                    <div class="results-header">
+                        <h3 data-i18n="diag_results">Diagnosis Results</h3>
+                        <div class="results-meta">
+                            <span id="resultTime">--</span>
+                            <span id="resultCount">--</span>
+                        </div>
+                    </div>
+                    <div id="resultsGrid"></div>
+                </section>
+            </section>
+
+            <!-- TAB: NUTRIENT -->
+            <section class="tab-pane" id="tab-nutrient">
+                                <div class="page-header panel-header panel-nutrition">
+                    <div class="panel-main">
+                        <p class="panel-kicker">NUTRITION LAB</p>
+                        <h2 class="page-title" data-i18n="nutri_title">Nutrient Calculator</h2>
+                        <p class="page-desc" data-i18n="nutri_desc">Calculate exact daily feed requirements based on cow weight and milk yield.</p>
+                    </div>
+                    <div class="panel-actions">
+                        <span class="panel-chip">Balanced Plan</span>
+                    </div>
+                    <div class="panel-points">
+                        <span>&#9878; Optimized for feed efficiency</span>
+                        <span>&#128167; Daily water guidance included</span>
+                        <span>&#128200; Adapted to lifecycle stage</span>
+                    </div>
+                </div><div class="nutri-layout">
+                    <div class="glass-card nutri-form-card">
+                        <div class="form-group">
+                            <label for="calcWeight" data-i18n="nutri_weight">Cow Weight (kg)</label>
+                            <input type="number" id="calcWeight" class="form-input" min="50" max="1500" step="1" placeholder="450">
+                        </div>
+                        <div class="form-group">
+                            <label for="calcYield" data-i18n="nutri_yield">Milk Yield (liters/day)</label>
+                            <input type="number" id="calcYield" class="form-input" min="0" step="0.1" placeholder="12">
+                        </div>
+                        <button class="btn btn-primary" onclick="calculateNutrients()" data-i18n="nutri_btn">Calculate Diet</button>
+                    </div>
+
+                    <div class="nutri-results" id="calcResults" style="display:none;">
+                        <div class="glass-card nutri-result-card">
+                            <span class="nutri-icon">&#127806;</span>
+                            <div class="nutri-label" data-i18n="nutri_res_roughage">Dry Roughage</div>
+                            <div class="nutri-value" id="resRoughage">0 kg</div>
+                        </div>
+                        <div class="glass-card nutri-result-card">
+                            <span class="nutri-icon">&#127806;</span>
+                            <div class="nutri-label" data-i18n="nutri_res_concentrate">Concentrate Feed</div>
+                            <div class="nutri-value" id="resConcentrate">0 kg</div>
+                        </div>
+                        <div class="glass-card nutri-result-card">
+                            <span class="nutri-icon">&#128167;</span>
+                            <div class="nutri-label" data-i18n="nutri_res_water">Clean Water</div>
+                            <div class="nutri-value" id="resWater">0 L</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: HISTORY -->
+            <section class="tab-pane" id="tab-history">
+                                <div class="page-header history-page-header panel-header panel-history">
+                    <div class="panel-main">
+                        <p class="panel-kicker">RECORDS</p>
+                        <h2 class="page-title" data-i18n="hist_title">Diagnosis History</h2>
+                        <p class="page-desc" data-i18n="hist_desc">View past medical scans and detailed reports.</p>
+                    </div>
+                    <div class="panel-actions">
+                        <span class="panel-chip">Auto-Saved</span>
+                        <button class="btn btn-secondary btn-sm" onclick="clearHistory()" data-i18n="hist_clear">Clear All History</button>
+                    </div>
+                    <div class="panel-points">
+                        <span>&#128737; Private to your account or device</span>
+                        <span>&#128337; Sorted by most recent activity</span>
+                        <span>&#9889; Tap a row to review details</span>
+                    </div>
+                </div><div id="historyEmptyState" class="glass-card empty-state">
+                    <div class="empty-icon">&#128221;</div>
+                    <p data-i18n="hist_empty">No diagnosis history found. Start a scan!</p>
+                </div>
+                <div id="historyGrid" class="history-grid"></div>
+            </section>
+
+            <!-- TAB: DETAIL REPORT -->
+            <section class="tab-pane" id="tab-report">
+                                <div class="page-header panel-header panel-report">
+                    <div class="panel-main">
+                        <p class="panel-kicker">DIAGNOSTICS</p>
+                        <h2 class="page-title" data-i18n="report_title">Detailed Report</h2>
+                        <p class="page-desc" data-i18n="report_desc">Full veterinary report with protocol, recommendations, medicine and nutrients.</p>
+                    </div>
+                    <div class="panel-actions">
+                        <span class="panel-chip">Professional Format</span>
+                    </div>
+                    <div class="panel-points">
+                        <span>&#128193; Verified output with confidence score</span>
+                        <span>&#128247; Photo evidence when available</span>
+                        <span>&#11015; Open any report for export workflow</span>
+                    </div>
+                </div><div class="report-layout">
+                    <div id="reportCardsView" class="report-cards-view"></div>
+                    <section class="glass-card report-detail-panel" id="reportDetailPanel" style="display:none;">
+                        <div id="reportDetailContent" class="history-detail-empty">
+                            <div class="empty-icon">&#128203;</div>
+                            <p data-i18n="report_empty">Run a diagnosis first, then open this tab for complete report details.</p>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+<!-- TAB: AI CHAT -->
+            <section class="tab-pane" id="tab-chat">
+                <div class="chat-container glass-card">
+                    <div class="chat-top-bar">
+                        <div class="chat-top-left">
+                            <div class="chat-avatar-lg">AI</div>
+                            <div>
+                                <h3 data-i18n="chat_title">AI Vet Assistant</h3>
+                                <small data-i18n="chat_desc">Powered by Gemini - supports all Indian languages</small>
+                            </div>
+                        </div>
+                        <div class="pulse-dot" style="background:var(--accent-primary);width:8px;height:8px;"></div>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-msg bot">
+                            <div class="chat-msg-avatar">AI</div>
+                            <div class="chat-msg-bubble">Hello! I am the PASHU CARE AI Assistant. Ask me anything about cattle health! (Type in Hindi, Marathi, Bengali, Tamil, etc.)</div>
+                        </div>
+                    </div>
+
+                    <div class="chat-suggestions" id="chatSuggestions">
+                        <span class="suggestion-chip" onclick="askSuggestion(this)">What should I feed a pregnant cow?</span>
+                        <span class="suggestion-chip" onclick="askSuggestion(this)">How to prevent Mastitis?</span>
+                        <span class="suggestion-chip" onclick="askSuggestion(this)">Cow has fever and nasal discharge</span>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="Ask about cow health..." data-i18n-placeholder="chat_placeholder" onkeypress="if(event.key==='Enter') sendChat()">
+                        <button class="btn btn-primary chat-send-btn" onclick="sendChat()" data-i18n="chat_send">Send</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: FEEDBACK (Hidden tab, accessed via profile) -->
+            <section class="tab-pane" id="tab-feedback">
+                                <div class="page-header panel-header panel-feedback">
+                    <div class="panel-main">
+                        <p class="panel-kicker">QUALITY CHANNEL</p>
+                        <h2 class="page-title" data-i18n="feed_title">Send Feedback</h2>
+                        <p class="page-desc" data-i18n="feed_desc">Help us improve the diagnostic model by reporting anomalies or requesting features.</p>
+                    </div>
+                    <div class="panel-actions">
+                        <span class="panel-chip">Product Improvement</span>
+                    </div>
+                    <div class="panel-points">
+                        <span>&#10004; Reviewed by the product workflow team</span>
+                        <span>&#128172; Share bug reports and feature requests</span>
+                        <span>&#128274; Submitted details remain private</span>
+                    </div>
+                </div><div class="feedback-form glass-card" style="max-width:600px;">
+                    <div class="form-group">
+                        <label data-i18n="feed_input_name">Your Name</label>
+                        <input type="text" id="feedName" class="form-input" placeholder="e.g. Ramesh">
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="feed_input_msg">Message / Suggestion</label>
+                        <textarea id="feedMsg" class="form-input" rows="5" placeholder="Describe your issue or suggestion..."></textarea>
+                    </div>
+                    <button class="btn btn-primary" onclick="submitFeedback()" data-i18n="feed_btn">Submit Feedback</button>
+                </div>
+            </section>
+
+            <!-- TAB: SETTINGS (Hidden tab, accessed via profile) -->
+            <section class="tab-pane" id="tab-settings">
+                                <div class="page-header panel-header panel-settings">
+                    <div class="panel-main">
+                        <p class="panel-kicker">SYSTEM CONTROL</p>
+                        <h2 class="page-title" data-i18n="set_title">Settings & Preferences</h2>
+                        <p class="page-desc">Customize language, theme, and workspace behavior for your field operations.</p>
+                    </div>
+                    <div class="panel-actions">
+                        <span class="panel-chip">Personalized Workspace</span>
+                    </div>
+                    <div class="panel-points">
+                        <span>&#127760; Multilingual interface configuration</span>
+                        <span>&#9728; Light and dark visual theme control</span>
+                        <span>&#9881; Preferences saved for next session</span>
+                    </div>
+                </div><div class="settings-grid">
+                    <div class="glass-card">
+                        <h3 data-i18n="set_lang_label">Application Language</h3>
+                        <p class="setting-desc" data-i18n="set_lang_desc">Instantly switch the dashboard UI into your preferred language.</p>
+                        <select id="langSelectSettings" class="form-input" onchange="changeLanguage(this.value); document.getElementById('langSelect').value=this.value;">
+                            <option value="en">English</option>
+                            <option value="hi">Hindi</option>
+                            <option value="mr">Marathi</option>
+                            <option value="bn">Bengali</option>
+                            <option value="or">Odia</option>
+                            <option value="ml">Malayalam</option>
+                            <option value="ta">Tamil</option>
+                            <option value="kn">Kannada</option>
+                            <option value="pa">Punjabi</option>
+                            <option value="as">Assamese</option>
+                            <option value="sa">Sanskrit</option>
+                        </select>
+                    </div>
+                    <div class="glass-card" style="display:flex;align-items:center;justify-content:space-between;">
+                        <div>
+                            <h3 data-i18n="set_theme_label">Dark / Light Mode</h3>
+                            <p class="setting-desc" data-i18n="set_theme_desc">Toggle visual theme.</p>
+                        </div>
+                        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+                            <span class="theme-icon-light" style="display:none;">&#9728;</span>
+                            <span class="theme-icon-dark">&#9790;</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<!-- FAB -->
+<button class="fab" onclick="switchTab('tab-diagnosis')" title="New Scan">&#128300;</button>
+
+<script src="app.js?v=20260310r3"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

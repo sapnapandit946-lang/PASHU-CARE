@@ -1,0 +1,104 @@
+{
+  "updatedAt": "2026-03-08T18:37:22.204Z",
+  "records": [
+    {
+      "id": "8797e243-04a7-4907-a78f-39f7316d6a24-1772995041739-p1xotn",
+      "synced": false,
+      "date": "2026-03-08T18:37:21.739Z",
+      "primaryId": "photosensitization",
+      "topDiagnosis": "Photosensitization",
+      "confidence": 7,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "photosensitization",
+          "name": "Photosensitization",
+          "score": 7,
+          "severity": "medium"
+        },
+        {
+          "id": "lumpy_skin",
+          "name": "Lumpy Skin Disease",
+          "score": 6,
+          "severity": "high"
+        },
+        {
+          "id": "mastitis",
+          "name": "Mastitis",
+          "score": 6,
+          "severity": "high"
+        },
+        {
+          "id": "bloat",
+          "name": "Bloat (Ruminal Tympany)",
+          "score": 6,
+          "severity": "high"
+        }
+      ],
+      "deviceId": "8797e243-04a7-4907-a78f-39f7316d6a24",
+      "queuedAt": "2026-03-08T18:37:21.739Z",
+      "serverSyncedAt": "2026-03-08T18:37:22.203Z"
+    },
+    {
+      "id": "8797e243-04a7-4907-a78f-39f7316d6a24-1772991002331-d44w9p",
+      "synced": false,
+      "date": "2026-03-08T17:30:02.331Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "8797e243-04a7-4907-a78f-39f7316d6a24",
+      "queuedAt": "2026-03-08T17:30:02.331Z",
+      "serverSyncedAt": "2026-03-08T17:30:02.333Z"
+    },
+    {
+      "id": "8797e243-04a7-4907-a78f-39f7316d6a24-1772990920613-vjyqct",
+      "synced": false,
+      "date": "2026-03-08T17:28:40.613Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "8797e243-04a7-4907-a78f-39f7316d6a24",
+      "queuedAt": "2026-03-08T17:28:40.614Z",
+      "serverSyncedAt": "2026-03-08T17:28:40.620Z"
+    },
+    {
+      "id": "8797e243-04a7-4907-a78f-39f7316d6a24-1772984277517-jtsmf7",
+      "synced": false,
+      "date": "2026-03-08T15:37:57.517Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "8797e243-04a7-4907-a78f-39f7316d6a24",
+      "queuedAt": "2026-03-08T15:37:57.517Z",
+      "serverSyncedAt": "2026-03-08T17:03:50.534Z"
+    }
+  ]
+}
