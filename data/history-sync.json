@@ -1,6 +1,543 @@
 {
-  "updatedAt": "2026-03-08T18:37:22.204Z",
+  "updatedAt": "2026-03-11T18:35:17.828Z",
   "records": [
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773254117815-wdu9z9",
+      "synced": false,
+      "date": "2026-03-11T18:35:17.815Z",
+      "primaryId": "ringworm",
+      "topDiagnosis": "Ringworm",
+      "confidence": 73,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFRUXFyAYFxcXFxsgIBggICggICAoHx8wJTAsMCYxJR8fKzsrMTU1NTU1ICs7QDs1QDA1NjYBCgoKDg0OGhAQGi0lHR0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "ringworm",
+          "name": "Ringworm",
+          "score": 73,
+          "severity": "low"
+        },
+        {
+          "id": "lumpy_skin",
+          "name": "Lumpy Skin Disease",
+          "score": 26,
+          "severity": "high"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-11T18:35:17.816Z",
+      "serverSyncedAt": "2026-03-11T18:35:17.828Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773253831844-5t2gfh",
+      "synced": false,
+      "date": "2026-03-11T18:30:31.844Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 99,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAA...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 99,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-11T18:30:31.844Z",
+      "serverSyncedAt": "2026-03-11T18:30:32.470Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773253783481-8s87vr",
+      "synced": false,
+      "date": "2026-03-11T18:29:43.481Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-11T18:29:43.482Z",
+      "serverSyncedAt": "2026-03-11T18:29:43.572Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773253748860-q6jxt3",
+      "synced": false,
+      "date": "2026-03-11T18:29:08.860Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-11T18:29:08.861Z",
+      "serverSyncedAt": "2026-03-11T18:29:08.882Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773253702823-mtttvv",
+      "synced": false,
+      "date": "2026-03-11T18:28:22.823Z",
+      "primaryId": "ringworm",
+      "topDiagnosis": "Ringworm",
+      "confidence": 73,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFRUXFyAYFxcXFxsgIBggICggICAoHx8wJTAsMCYxJR8fKzsrMTU1NTU1ICs7QDs1QDA1NjYBCgoKDg0OGhAQGi0lHR0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "ringworm",
+          "name": "Ringworm",
+          "score": 73,
+          "severity": "low"
+        },
+        {
+          "id": "lumpy_skin",
+          "name": "Lumpy Skin Disease",
+          "score": 26,
+          "severity": "high"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-11T18:28:22.824Z",
+      "serverSyncedAt": "2026-03-11T18:28:22.834Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773252040791-g86np2",
+      "synced": false,
+      "date": "2026-03-11T18:00:40.792Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 99,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAA...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 99,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-11T18:00:40.792Z",
+      "serverSyncedAt": "2026-03-11T18:00:40.816Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773239710019-5hthfk",
+      "synced": false,
+      "date": "2026-03-11T14:35:10.019Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAA...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-11T14:35:10.020Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773239194260-3d25gr",
+      "synced": false,
+      "date": "2026-03-11T14:26:34.260Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAA...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-11T14:26:34.261Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773165381008-24qwub",
+      "synced": false,
+      "date": "2026-03-10T17:56:21.008Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:56:21.008Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773165365477-72t421",
+      "synced": false,
+      "date": "2026-03-10T17:56:05.478Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhIVFhUVFRUXFxUYFhcXFRUVFxUXFhgWFRUYHSggGBolHRYXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0mHSYtLS8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:56:05.479Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773165332623-hq2hpl",
+      "synced": false,
+      "date": "2026-03-10T17:55:32.623Z",
+      "primaryId": "ringworm",
+      "topDiagnosis": "Ringworm",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFRUXFyAYFxcXFxsgIBggICggICAoHx8wJTAsMCYxJR8fKzsrMTU1NTU1ICs7QDs1QDA1NjYBCgoKDg0OGhAQGi0lHR0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "ringworm",
+          "name": "Ringworm",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:55:32.624Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773165332481-c2fcvq",
+      "synced": false,
+      "date": "2026-03-10T17:55:32.481Z",
+      "primaryId": "ringworm",
+      "topDiagnosis": "Ringworm",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFRUXFyAYFxcXFxsgIBggICggICAoHx8wJTAsMCYxJR8fKzsrMTU1NTU1ICs7QDs1QDA1NjYBCgoKDg0OGhAQGi0lHR0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "ringworm",
+          "name": "Ringworm",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:55:32.481Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773164687523-z1urx7",
+      "synced": false,
+      "date": "2026-03-10T17:44:47.523Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:44:47.524Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773164669778-6uzdwy",
+      "synced": false,
+      "date": "2026-03-10T17:44:29.779Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhIVFhUVFRUXFxUYFhcXFRUVFxUXFhgWFRUYHSggGBolHRYXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0mHSYtLS8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:44:29.780Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773164624074-g0fiq1",
+      "synced": false,
+      "date": "2026-03-10T17:43:44.074Z",
+      "primaryId": "ringworm",
+      "topDiagnosis": "Ringworm",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFRUXFyAYFxcXFxsgIBggICggICAoHx8wJTAsMCYxJR8fKzsrMTU1NTU1ICs7QDs1QDA1NjYBCgoKDg0OGhAQGi0lHR0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "ringworm",
+          "name": "Ringworm",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:43:44.074Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773164296017-hby3f2",
+      "synced": false,
+      "date": "2026-03-10T17:38:16.017Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhIVFhUVFRUXFxUYFhcXFRUVFxUXFhgWFRUYHSggGBolHRYXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0mHSYtLS8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:38:16.017Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773164082145-plddq0",
+      "synced": false,
+      "date": "2026-03-10T17:34:42.145Z",
+      "primaryId": "ringworm",
+      "topDiagnosis": "Ringworm",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFRUXFyAYFxcXFxsgIBggICggICAoHx8wJTAsMCYxJR8fKzsrMTU1NTU1ICs7QDs1QDA1NjYBCgoKDg0OGhAQGi0lHR0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "ringworm",
+          "name": "Ringworm",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:34:42.145Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773164071190-2e784t",
+      "synced": false,
+      "date": "2026-03-10T17:34:31.190Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:34:31.190Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773164046356-ohj63w",
+      "synced": false,
+      "date": "2026-03-10T17:34:06.356Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhIVFhUVFRUXFxUYFhcXFRUVFxUXFhgWFRUYHSggGBolHRYXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0mHSYtLS8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:34:06.358Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773163898440-g0extz",
+      "synced": false,
+      "date": "2026-03-10T17:31:38.440Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTEhMWFRUXGBkaGRcYGBsZGxsfGx0YGhgaGh0aHSggGBolGx8ZITEiJSstLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGy0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:31:38.440Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773162926346-7nql2s",
+      "synced": false,
+      "date": "2026-03-10T17:15:26.346Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4cSkRXhpZgAASUkqAAgAAAAKABsBBQABAAAAhgAAABoBBQABAAAAjgAAAAABBAABAAAAQBAAADEBAgAgAAAAlgAAAAEBBAABAAAAMAwAAA4BAgAgAAAAtgAAABMCAwABAAAAAgAAAGmHBAABAAAA1gAAACgBAwABAAAAAgAAABIBA...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:15:26.347Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773162744182-xc8p17",
+      "synced": false,
+      "date": "2026-03-10T17:12:24.183Z",
+      "primaryId": "lumpy_skin",
+      "topDiagnosis": "Lumpy Skin Disease",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFRUXFxcVFxcXFxUXFxUXFRUXFxUXFRUYHSggGBolHRUXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tL...",
+      "results": [
+        {
+          "id": "lumpy_skin",
+          "name": "Lumpy Skin Disease",
+          "score": 100,
+          "severity": "high"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T17:12:24.183Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773159050777-tpwdmi",
+      "synced": false,
+      "date": "2026-03-10T16:10:50.777Z",
+      "primaryId": "healthy_cow",
+      "topDiagnosis": "Healthy Cow (No Visible Disease)",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O...",
+      "results": [
+        {
+          "id": "healthy_cow",
+          "name": "Healthy Cow (No Visible Disease)",
+          "score": 100,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T16:10:50.777Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773158978145-qsn0b6",
+      "synced": false,
+      "date": "2026-03-10T16:09:38.145Z",
+      "primaryId": "not_cow",
+      "topDiagnosis": "Image Not Suitable for Cattle Diagnosis",
+      "confidence": 94,
+      "hasImage": true,
+      "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAuoAAAKfCAYAAAA4iO3UAACWInRFWHRteGZpbGUAJTNDbXhmaWxlJTIwaG9zdCUzRCUyMmFwcC5kaWFncmFtcy5uZXQlMjIlMjBhZ2VudCUzRCUyMk1vemlsbGElMkY1LjAlMjAoTGludXglM0IlMjBBbm...",
+      "results": [
+        {
+          "id": "not_cow",
+          "name": "Image Not Suitable for Cattle Diagnosis",
+          "score": 94,
+          "severity": "low"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T16:09:38.145Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
+    {
+      "id": "1e3026c1-736c-48de-acbf-abd078054eba-1773154802381-ba6r6p",
+      "synced": false,
+      "date": "2026-03-10T15:00:02.382Z",
+      "primaryId": "lumpy_skin",
+      "topDiagnosis": "Lumpy Skin Disease",
+      "confidence": 100,
+      "hasImage": true,
+      "thumbnail": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQIAJQAlAAD/2wCEAAUFBQUFBQYGBgYICQgJCAwLCgoLDBINDg0ODRIbERQRERQRGxgdGBYYHRgrIh4eIisyKigqMjw2NjxMSExkZIYBBQUFBQUFBgYGBggJCAkIDAsKCgsMEg0ODQ4NEhsRFBERFBEbGB0YFhgdG...",
+      "results": [
+        {
+          "id": "lumpy_skin",
+          "name": "Lumpy Skin Disease",
+          "score": 100,
+          "severity": "high"
+        }
+      ],
+      "deviceId": "1e3026c1-736c-48de-acbf-abd078054eba",
+      "queuedAt": "2026-03-10T15:00:02.382Z",
+      "serverSyncedAt": "2026-03-11T16:02:39.464Z"
+    },
     {
       "id": "8797e243-04a7-4907-a78f-39f7316d6a24-1772995041739-p1xotn",
       "synced": false,

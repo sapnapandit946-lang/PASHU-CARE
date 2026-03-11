@@ -1,15 +1,16 @@
 const CACHE_PREFIX = 'pashucare-';
-const CACHE_VERSION = 'v23';
+const CACHE_VERSION = 'v24';
 const STATIC_CACHE = `${CACHE_PREFIX}static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${CACHE_VERSION}`;
-const IS_LOCAL_DEV = ['localhost', '127.0.0.1', '::1'].includes(self.location.hostname);
-
 const APP_SHELL = [
   './',
   './index.html',
   './index.css',
   './app.js',
-  './i18n.js'
+  './i18n.js',
+  './manifest.webmanifest',
+  './pashu-icon.svg',
+  './rag-status.html'
 ];
 
 const OPTIONAL_ASSETS = [
@@ -85,11 +86,6 @@ async function staleWhileRevalidate(request) {
 }
 
 self.addEventListener('install', event => {
-  if (IS_LOCAL_DEV) {
-    self.skipWaiting();
-    return;
-  }
-
   event.waitUntil((async () => {
     const cache = await caches.open(STATIC_CACHE);
     await cache.addAll(APP_SHELL.map(url => new Request(url, { cache: 'reload' })));
@@ -111,17 +107,6 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
-    if (IS_LOCAL_DEV) {
-      const keys = await caches.keys();
-      await Promise.all(
-        keys
-          .filter(key => key.startsWith(CACHE_PREFIX))
-          .map(key => caches.delete(key))
-      );
-      await self.clients.claim();
-      return;
-    }
-
     const keys = await caches.keys();
     const validCaches = new Set([STATIC_CACHE, RUNTIME_CACHE]);
     await Promise.all(
@@ -148,16 +133,6 @@ self.addEventListener('fetch', event => {
   }
 
   if (!isSameOrigin(request.url)) return;
-
-  if (IS_LOCAL_DEV) {
-    event.respondWith(
-      fetch(asNoStoreRequest(request)).catch(async () => {
-        const cached = await caches.match(request);
-        return cached || new Response('', { status: 504, statusText: 'Gateway Timeout' });
-      })
-    );
-    return;
-  }
 
   if (request.mode === 'navigate') {
     event.respondWith(networkFirstNavigation(request));

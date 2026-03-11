@@ -1,0 +1,16 @@
+﻿{
+  "name": "PASHU CARE",
+  "short_name": "PASHU CARE",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#050a14",
+  "icons": [
+    {
+      "src": "./pashu-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

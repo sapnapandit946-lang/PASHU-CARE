@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PASHU CARE - RAG Status</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --border: #e2e8f0;
+        --accent: #0ea5e9;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 920px;
+        margin: 32px auto;
+        padding: 0 20px 40px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 18px 20px;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: 22px;
+      }
+      p {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+      .grid {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .row {
+        display: grid;
+        gap: 10px;
+      }
+      label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      input, select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 14px;
+      }
+      button {
+        border: none;
+        background: var(--accent);
+        color: white;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      pre {
+        white-space: pre-wrap;
+        background: #0b1220;
+        color: #e2e8f0;
+        padding: 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        overflow: auto;
+      }
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>RAG Health Check</h1>
+        <p>Quick status for knowledge base and retrieval pipeline.</p>
+        <div class="grid">
+          <div class="row">
+            <label>Health status</label>
+            <div id="healthBadge" class="badge">Loading...</div>
+          </div>
+          <div class="row">
+            <label>Knowledge base files</label>
+            <div id="kbInfo">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h1>RAG Test</h1>
+        <p>Run a retrieval-only check (no LLM). Returns top-k chunks.</p>
+        <div class="grid">
+          <div class="row">
+            <label>Question</label>
+            <input id="question" value="Cow has swollen udder and clotted milk. What should I do?">
+          </div>
+          <div class="row">
+            <label>Top K</label>
+            <select id="topK">
+              <option>3</option>
+              <option selected>5</option>
+              <option>8</option>
+            </select>
+          </div>
+          <div class="row">
+            <button id="runTest">Run Test</button>
+          </div>
+          <div class="row">
+            <label>Response</label>
+            <pre id="output">Waiting for test...</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      async function loadHealth() {
+        const badge = document.getElementById('healthBadge');
+        const kbInfo = document.getElementById('kbInfo');
+        try {
+          const res = await fetch('/api/rag/health');
+          const data = await res.json();
+          if (!res.ok || !data.ok) throw new Error(data.error || 'Health check failed');
+          badge.textContent = 'OK';
+          kbInfo.textContent = `${data.knowledgeBaseFiles} file(s) in ${data.knowledgeBaseDir}`;
+        } catch (err) {
+          badge.textContent = 'ERROR';
+          kbInfo.textContent = err.message;
+        }
+      }
+
+      async function runTest() {
+        const output = document.getElementById('output');
+        output.textContent = 'Running...';
+        const question = document.getElementById('question').value.trim();
+        const topK = document.getElementById('topK').value;
+        try {
+          const res = await fetch(`/api/rag/test?question=${encodeURIComponent(question)}&topK=${encodeURIComponent(topK)}`);
+          const data = await res.json();
+          if (!res.ok || !data.ok) throw new Error(data.error || 'Test failed');
+          output.textContent = JSON.stringify(data, null, 2);
+        } catch (err) {
+          output.textContent = `ERROR: ${err.message}`;
+        }
+      }
+
+      document.getElementById('runTest').addEventListener('click', runTest);
+      loadHealth();
+    </script>
+  </body>
+</html>

@@ -6,6 +6,8 @@
     <meta name="description" content="PASHU CARE - AI-powered veterinary diagnostic platform for cow health.">
     <meta name="theme-color" content="#050a14">
     <title>PASHU CARE - ML Cow Disease Diagnosis & AI Chat</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="pashu-icon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -35,7 +37,7 @@
             <button class="nav-tab" data-target="tab-diagnosis" data-i18n="nav_diagnose">Diagnose</button>
             <button class="nav-tab" data-target="tab-nutrient" data-i18n="nav_nutrient">Nutrition</button>
             <button class="nav-tab" data-target="tab-history" data-i18n="nav_history">History</button>
-            <button class="nav-tab" data-target="tab-report">Detail Report</button>
+            <button class="nav-tab" data-target="tab-report" data-i18n="nav_report">Detail Report</button>
             <button class="nav-tab" data-target="tab-chat" data-i18n="nav_chat">AI Chat</button>
             <div class="nav-pill" id="navPill"></div>
         </div>
@@ -368,18 +370,39 @@
                         <input type="file" id="fileInput" accept="image/*" hidden>
                         <div class="card-header">
                             <h3 data-i18n="diag_clinical_input">Clinical Image Input</h3>
-                            <button class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput').click()" data-i18n="diag_select_image">Select Image</button>
+                            <div class="card-header-actions">
+                                <button class="btn btn-secondary btn-sm" id="cameraBtn" data-i18n="diag_camera_btn">Scan with Camera</button>
+                                <button class="btn btn-secondary btn-sm" onclick="document.getElementById('fileInput').click()" data-i18n="diag_select_image">Select Image</button>
+                            </div>
                         </div>
                         <p class="card-sub" data-i18n="diag_image_tip">Use a clear, well-lit image focused on the affected area.</p>
                         
                         <div id="uploadPlaceholder" class="premium-placeholder" onclick="document.getElementById('fileInput').click()">
-                            <div class="premium-icon-box">
-                                <span class="premium-icon">&#128247;</span>
+                            <div class="placeholder-content" id="placeholderContent">
+                                <div class="premium-icon-box">
+                                    <span class="premium-icon">&#128247;</span>
+                                </div>
+                                <p class="premium-text" data-i18n="diag_upload_box">Click or drag image to upload</p>
+                                <small class="premium-sub" data-i18n="diag_upload_sub">Supports JPG, PNG (Max 5MB)</small>
+                                <small class="premium-sub" data-i18n="diag_image_tip">Use a clear, well-lit image focused on the affected area.</small>
                             </div>
-                            <p class="premium-text" data-i18n="diag_upload_box">Click or drag image to upload</p>
-                            <small class="premium-sub" data-i18n="diag_upload_sub">Supports JPG, PNG (Max 5MB)</small>
+                            <div class="camera-inline" id="cameraInline" onclick="event.stopPropagation()">
+                                <div class="camera-stage">
+                                    <video id="cameraVideo" playsinline muted autoplay></video>
+                                    <canvas id="cameraCanvas" style="display:none;"></canvas>
+                                    <div class="camera-guides">
+                                        <span class="camera-guide-label" data-i18n="diag_camera_guide">Hold steady and keep the affected area centered.</span>
+                                    </div>
+                                </div>
+                                <div class="camera-status" id="cameraStatus" role="status" aria-live="polite"></div>
+                                <div class="camera-actions">
+                                    <button class="btn btn-secondary btn-sm" onclick="closeCameraModal()" data-i18n="diag_camera_cancel">Cancel</button>
+                                    <button class="btn btn-primary" id="cameraCaptureBtn" onclick="captureCameraImage()" data-i18n="diag_camera_capture">Capture</button>
+                                </div>
+                                <div class="camera-footnote" data-i18n="diag_camera_note">Live preview stops after capture. Only the snapshot is used.</div>
+                            </div>
                         </div>
-                        
+
                         <div class="upload-preview" id="uploadPreview" style="display:none; position:relative;">
                             <img id="previewImage" src="" alt="Preview">
                             <div class="elegant-scanner">
@@ -503,18 +526,18 @@
             <section class="tab-pane" id="tab-history">
                                 <div class="page-header history-page-header panel-header panel-history">
                     <div class="panel-main">
-                        <p class="panel-kicker">RECORDS</p>
+                        <p class="panel-kicker" data-i18n="history_records">RECORDS</p>
                         <h2 class="page-title" data-i18n="hist_title">Diagnosis History</h2>
                         <p class="page-desc" data-i18n="hist_desc">View past medical scans and detailed reports.</p>
                     </div>
                     <div class="panel-actions">
-                        <span class="panel-chip">Auto-Saved</span>
+                        <span class="panel-chip" data-i18n="history_auto_saved">Auto-Saved</span>
                         <button class="btn btn-secondary btn-sm" onclick="clearHistory()" data-i18n="hist_clear">Clear All History</button>
                     </div>
                     <div class="panel-points">
-                        <span>&#128737; Private to your account or device</span>
-                        <span>&#128337; Sorted by most recent activity</span>
-                        <span>&#9889; Tap a row to review details</span>
+                        <span data-i18n="history_private">&#128737; Private to your account or device</span>
+                        <span data-i18n="history_sorted">&#128337; Sorted by most recent activity</span>
+                        <span data-i18n="history_tap_row">&#9889; Tap a row to review details</span>
                     </div>
                 </div><div id="historyEmptyState" class="glass-card empty-state">
                     <div class="empty-icon">&#128221;</div>
@@ -567,14 +590,14 @@
                     <div class="chat-messages" id="chatMessages">
                         <div class="chat-msg bot">
                             <div class="chat-msg-avatar">AI</div>
-                            <div class="chat-msg-bubble">Hello! I am the PASHU CARE AI Assistant. Ask me anything about cattle health! (Type in Hindi, Marathi, Bengali, Tamil, etc.)</div>
+                            <div class="chat-msg-bubble" data-i18n="chat_welcome">Hello! I am the PASHU CARE AI Assistant. Ask me anything about cattle health! (Type in Hindi, Marathi, Bengali, Tamil, etc.)</div>
                         </div>
                     </div>
 
                     <div class="chat-suggestions" id="chatSuggestions">
-                        <span class="suggestion-chip" onclick="askSuggestion(this)">What should I feed a pregnant cow?</span>
-                        <span class="suggestion-chip" onclick="askSuggestion(this)">How to prevent Mastitis?</span>
-                        <span class="suggestion-chip" onclick="askSuggestion(this)">Cow has fever and nasal discharge</span>
+                        <span class="suggestion-chip" onclick="askSuggestion(this)" data-i18n="chat_suggest_1">What should I feed a pregnant cow?</span>
+                        <span class="suggestion-chip" onclick="askSuggestion(this)" data-i18n="chat_suggest_2">How to prevent Mastitis?</span>
+                        <span class="suggestion-chip" onclick="askSuggestion(this)" data-i18n="chat_suggest_3">Cow has fever and nasal discharge</span>
                     </div>
 
                     <div class="chat-input-area">
@@ -656,6 +679,15 @@
                             <span class="theme-icon-light" style="display:none;">&#9728;</span>
                             <span class="theme-icon-dark">&#9790;</span>
                         </button>
+                    </div>
+                    <div class="glass-card">
+                        <h3 data-i18n="set_offline_title">Offline Access & QR</h3>
+                        <p class="setting-desc" data-i18n="set_offline_desc">Generate a QR code for judges. Open once online, then it works in airplane mode.</p>
+                        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+                            <button class="btn btn-primary btn-sm" type="button" onclick="showAppQr()"
+                              data-i18n="set_offline_btn">Show App QR</button>
+                            <span class="setting-desc" data-i18n="set_offline_note">Install the app after opening for best offline use.</span>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -4,6 +4,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { execFile } = require('child_process');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -38,6 +39,31 @@ function readUsers() {
 function writeUsers(users) {
   ensureDataDir();
   fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2), 'utf8');
+}
+
+function runRagRetrieve(question, topK = 5) {
+  return new Promise((resolve, reject) => {
+    const pythonCmd = process.env.RAG_PYTHON || 'python';
+    const args = [
+      '-m', 'rag.cli',
+      '--mode', 'retrieve',
+      '--question', question,
+      '--top-k', String(topK)
+    ];
+
+    execFile(pythonCmd, args, { cwd: __dirname, maxBuffer: 6 * 1024 * 1024 }, (err, stdout, stderr) => {
+      if (err) {
+        const msg = (stderr || '').trim() || err.message;
+        return reject(new Error(msg));
+      }
+      try {
+        const payload = JSON.parse(stdout);
+        return resolve(payload);
+      } catch (parseErr) {
+        return reject(new Error('Failed to parse RAG output.'));
+      }
+    });
+  });
 }
 
 // ── Auth Endpoints ───────────────────────────────────────
@@ -147,18 +173,62 @@ app.get('/api/sync/history', (req, res) => {
 });
 
 // ── Proxy for Gemini API ─────────────────────────────────
+app.get('/api/rag/test', async (req, res) => {
+  try {
+    const question = String(req.query.question || 'Cow has swollen udder and clotted milk. What should I do?');
+    const topK = Number(req.query.topK) || 5;
+    const rag = await runRagRetrieve(question, topK);
+    const chunks = Array.isArray(rag?.chunks) ? rag.chunks : [];
+    return res.json({
+      ok: true,
+      question,
+      topK,
+      chunkCount: chunks.length,
+      chunksPreview: chunks.slice(0, 3),
+    });
+  } catch (error) {
+    console.error('RAG test error:', error.message);
+    return res.status(500).json({ ok: false, error: error.message });
+  }
+});
+
+app.get('/api/rag/health', (req, res) => {
+  try {
+    const kbDir = path.join(__dirname, 'rag', 'knowledge_base');
+    const files = fs.existsSync(kbDir) ? fs.readdirSync(kbDir).filter(f => f.endsWith('.txt')) : [];
+    return res.json({
+      ok: true,
+      knowledgeBaseFiles: files.length,
+      knowledgeBaseDir: kbDir
+    });
+  } catch (error) {
+    console.error('RAG health error:', error.message);
+    return res.status(500).json({ ok: false, error: error.message });
+  }
+});
+
 app.post('/api/chat', async (req, res) => {
   try {
     const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
     if (!GEMINI_API_KEY || GEMINI_API_KEY === 'I CAN PUT HERE TELL ME LINE ONLY ') {
       return res.status(500).json({ error: "Missing or invalid Gemini API Key in backend .env file." });
     }
-    const { systemPrompt, question } = req.body;
+    const { systemPrompt, question, useRag, ragTopK, langName } = req.body || {};
     if (!systemPrompt || !question) {
       return res.status(400).json({ error: "Missing systemPrompt or question in request body." });
     }
+    let finalSystemPrompt = systemPrompt;
+    if (useRag) {
+      const rag = await runRagRetrieve(String(question), Number(ragTopK) || 5);
+      const context = rag?.context || '';
+      if (!context) {
+        return res.status(500).json({ error: "RAG context not available." });
+      }
+      const languageLine = langName ? `\nRESPONSE LANGUAGE: ${langName}` : '';
+      finalSystemPrompt = `${systemPrompt}\n\nRAG CONTEXT:\n${context}${languageLine}\n\nUse ONLY the RAG context above. If missing, say evidence is insufficient.`;
+    }
     const payload = {
-      system_instruction: { parts: { text: systemPrompt } },
+      system_instruction: { parts: { text: finalSystemPrompt } },
       contents: [{ parts: [{ text: question }] }]
     };
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
